@@ -4,24 +4,52 @@ describe("Current button", () => {
     let btn = await $("button");
     expect(await btn.getText()).toEqual("Current City");
     expect(await btn.isDisplayed()).toEqual(true);
-
-    console.log(btn);
   });
 
   it("Verify clicking on current button shows a message ", async () => {
     browser.url("/");
     let btn = await $("button");
     let cityName = await $("h1");
+    expect(await cityName.toBeClickable);
     await btn.click();
-    await browser.pause(8000);
-    await cityName.waitForDisplayed({ timeout: 3000 });
-    expect(await cityName.getText()).toEqual("omer");
   });
 });
 
-// npm run test -- --spec ./test/specs/weather.e2e.js
-// --spec ./test/specs/weather.e2e.js
+describe("Search", () => {
+  it("Verify submit btn is disabled when text is entered", async () => {
+    browser.url("/");
+    let input = $("#searchBox");
+    let searchSub = $(".searchSub");
+    await expect(searchSub).toBeDisabled();
+    await input.click();
+    await input.setValue("tel aviv");
+    await expect(searchSub).toBeEnabled();
+    await browser.pause(3000);
+  });
 
-// wdio run wdio.conf.js --spec /test/specs/weather.e2e.js
+  it("Verify searching for valid city updates the city name", async () => {
+    browser.url("/");
+    let input = $("#searchBox");
+    let searchSub = $(".searchSub");
+    let cityName = $("#city");
+    await input.setValue("tel aviv");
+    await searchSub.click();
+    await browser.pause(1000);
+    expect(await cityName.getText()).toEqual("Tel Aviv");
+  });
 
-// npx wdio run wdio.conf.js --spec .test/specs/weather.e2e.js
+  it("Verify searching for invalid city pops up alert", async () => {
+    browser.url("/");
+    let input = $("#searchBox");
+    let searchSub = $(".searchSub");
+    let cityName = $("#city");
+    let CurrentCityName = cityName.getText();
+    await input.setValue("asd");
+    await searchSub.click();
+    await browser.pause(1000);
+    expect(await browser.isAlertOpen()).toEqual(true);
+    expect(await browser.getAlertText()).toEqual("City Not Found");
+    await browser.acceptAlert();
+    expect(await browser.isAlertOpen()).toEqual(false);
+  });
+});
