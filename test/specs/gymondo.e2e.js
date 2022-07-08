@@ -1,30 +1,33 @@
-describe("My Plan", () => {
+const loginPage = require("../pageobjects/login.page");
+const planPage = require("../pageobjects/plan.page");
+
+describe("Adding first plan and verifying content", () => {
   it("Should login and verify user is on My plan tab", async () => {
-    browser.url("");
-    browser.maximizeWindow();
-    await expect(browser).toHaveTitle(
+    loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
+    expect(browser).toHaveTitle(
       "Gymondo Online Fitness - Get Fit & Happy at Home"
     );
-    await (await $("div=Accept")).click();
-    await (await $(".top-nav").$("div=Log in")).click();
-    await $("#mail").setValue("qa-prod1@gymondo.de");
-    await $("#password").setValue("purpleSquid22!");
-    await (await $("form")).$("div=Log in").click();
-    const topNav = await $(".top-nav__list").$("a=My plan");
-    await expect(topNav).toHaveAttribute("aria-current", "page");
+    const myPlanNav = await $(".top-nav__list").$("a=My plan");
+    await expect(await $(".top-nav__list").$("a=My plan")).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
+    expect(await $(".page-wrapper h1").getText()).toContain(", Tester!");
+    expect(await $(".page-wrapper h2").isDisplayed()).toEqual(true);
   });
 
   it("Should start a new program", async () => {
-    await (await $(".modal__content")).$("div=Got it").click();
-    await (await $("div=Start new program")).waitForDisplayed(5000);
-    await (await $("div=Start new program")).click();
-    await (await $("div=Start program")).click();
-    await (
-      await $(".modal__content").$(".modal__footer").$("div=Save")
-    ).click();
-    await browser.pause(5000);
-    // expect(await btn.getText()).toEqual("Current City");
-    // expect(await btn.isDisplayed()).toEqual(true);
+    planPage.startProgram();
+    expect(await $(".page-wrapper h1").getText()).toContain(", Tester!");
+    await expect(await $("div=Plan settings")).toExist();
+  });
+
+  it("Should remove the added program", async () => {
+    planPage.removeProgram();
+    await browser.pause(1000);
+    expect(await $(".page-wrapper h2").getText()).toEqual(
+      "Select a program and start planning your workout routine."
+    );
   });
 });
 
