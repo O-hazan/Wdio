@@ -13,8 +13,7 @@ describe("calendar is back to default view when there is not ongoing program", (
       .click();
     //   Remove the program
     await planPage.removeProgram();
-
-    // Verify the today is selected in the calendar - Here there is a bug that makes the test fail (Omer0 remove the [2])
+    // Verify the today is selected in the calendar - Here there is a bug that makes the test fail (Omer - remove the [2])
     await expect(
       await $(`div[class*="calendar_wrapper"]`).$$(
         `div[class*="calendar_dateWrapper"]`

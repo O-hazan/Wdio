@@ -28,6 +28,12 @@ class PlanPage {
   }
 
   async startProgram() {
+    // remove existing program if there is before starting one (should be extended to remove dynamic amount of programs by various variables)
+    let exist = await this.btnPlanSettings.isExisting();
+    if (exist === true) {
+      await this.removeProgram();
+    }
+    // Start a program
     await (await this.btnNewProgram).waitForDisplayed();
     await this.btnNewProgram.click();
     await this.btnStartsProgram.waitForDisplayed();

@@ -1,0 +1,25 @@
+Test cases:
+
+Title: Start a program and verify some elements are displayed.
+
+Login:	
+	Open homepage
+	Accept coockies
+	Click Login button
+	Enter user name and password
+	Click submit
+	Click "got it"
+Start program:	
+	Click start new program
+	Click start program
+	Click save
+End program:
+	Click plan settings
+	Click end
+	Confirm end program
+
+Verifications:
+    Verify window title
+    Verify nav link attribute
+    Verify nav link color
+    Verify head titles are displayed

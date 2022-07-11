@@ -15,7 +15,6 @@ describe("Adding first plan and verifying content", () => {
       "aria-current",
       "page"
     );
-    console.log("here");
     // Verify nav link color
     const colorobj = await $(".top-nav__list")
       .$("a=My plan")
@@ -23,13 +22,13 @@ describe("Adding first plan and verifying content", () => {
     let colorHex = colorobj.parsed.hex;
     await expect(colorHex).toBe("#ff7f66");
     // Verify head titles are displayed
-    expect(await $(".page-wrapper h1").getText()).toContain(", Tester!");
+    await expect(await $(".page-wrapper h1").getText()).toContain(", Tester!");
     await expect(await $(".page-wrapper h2")).toBeDisplayed();
   });
 
   it("Should start a new program", async () => {
     //  Start a program
-    planPage.startProgram();
+    await planPage.startProgram();
     //  Verify program settings and timeline area appears.
     await expect(await $("div[class*=calendar_buttons]")).toBeDisplayed();
     // Verify program stats appear
@@ -38,10 +37,10 @@ describe("Adding first plan and verifying content", () => {
 
   it("Should remove the added program", async () => {
     //  Clean after the test
-    planPage.removeProgram();
+    await planPage.removeProgram();
     await browser.pause(1000);
     // Verify welcome text appear again
-    expect(await $(".page-wrapper h2").getText()).toEqual(
+    await expect(await $(".page-wrapper h2").getText()).toEqual(
       "Select a program and start planning your workout routine."
     );
   });

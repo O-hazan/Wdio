@@ -6,4 +6,10 @@ ADD . .
 
 RUN npm install
 
-CMD npx wdio run wdio.conf.js --spec .test/specs/weather.e2e.js
+RUN npm install chromedriver --chromedriver_version=LATEST
+
+# RUN  apt-get update
+
+# RUN  apt install ./google-chrome-stable_current_amd64.deb
+
+CMD npx wdio run wdio.conf.js 
