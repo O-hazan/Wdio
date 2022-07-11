@@ -4,7 +4,8 @@ const planPage = require("../pageobjects/plan.page");
 describe("Adding first plan and verifying content", () => {
   it("Should login and verify user is on My plan tab", async () => {
     // Logs the user in
-    loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
+    await loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
+
     // Verify window title
     await expect(browser).toHaveTitle(
       "Gymondo Online Fitness - Get Fit & Happy at Home"
@@ -14,6 +15,7 @@ describe("Adding first plan and verifying content", () => {
       "aria-current",
       "page"
     );
+    console.log("here");
     // Verify nav link color
     const colorobj = await $(".top-nav__list")
       .$("a=My plan")
