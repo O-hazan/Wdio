@@ -23,17 +23,25 @@ class PlanPage {
     return $(".modal__footer button");
   }
 
+  get programTitle() {
+    return $("div[class*=program-training-settings_programTitle]");
+  }
+
   async startProgram() {
-    await this.btnNewProgram.waitForDisplayed(2000);
+    await (await this.btnNewProgram).waitForDisplayed();
     await this.btnNewProgram.click();
+    await this.btnStartsProgram.waitForDisplayed();
     await this.btnStartsProgram.click();
+    await this.btnSave.waitForDisplayed();
     await this.btnSave.click();
   }
 
   async removeProgram() {
-    await this.btnPlanSettings.waitForDisplayed(2000);
+    await this.btnPlanSettings.waitForDisplayed();
     await this.btnPlanSettings.click();
+    await this.btnEnd.waitForDisplayed();
     await this.btnEnd.click();
+    await this.btnEndConfirm.waitForDisplayed();
     await this.btnEndConfirm.click();
   }
 }
