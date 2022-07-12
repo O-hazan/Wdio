@@ -14,7 +14,11 @@ WebdriveIO tests for Gymondo task
 
 ### General info:
 
-A bug was found:
+One of the test found a minor bug, see below.
+Currently the test is invalid so it will not fail.
+In order to make the test valid follow the instructions on calendar.e2e.js (line 35)
+
+Bug:
 Today isn't selected in calendar if user ends program after selecting another day
 
 Found in test:

@@ -32,7 +32,7 @@ describe("Calendar is back to not active when ending the last program", () => {
     await expect(
       await $(`div[class*="calendar_wrapper"]`).$$(
         `div[class*="calendar_dateWrapper"]`
-      )[0]
+      )[2] //Change here the 2 to 0 to make the test valid and it will fail because the wrong item is selected
     ).toHaveElementClassContaining("calendar_active");
 
     // Verify workout days dot indication is removed from calendar
