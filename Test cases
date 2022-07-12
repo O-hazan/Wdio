@@ -1,25 +1,51 @@
 Test cases:
 
-Title: Start a program and verify some elements are displayed.
+Title: Start and end a program and verify some elements are displayed.
 
-Login:	
-	Open homepage
-	Accept coockies
-	Click Login button
-	Enter user name and password
-	Click submit
-	Click "got it"
-Start program:	
-	Click start new program
-	Click start program
-	Click save
-End program:
-	Click plan settings
-	Click end
-	Confirm end program
+    Login:	
+        Open homepage
+        Accept coockies
+        Click Login button
+        Enter user name and password
+        Click submit
+        Click "got it"
+    Start program:	
+        Click start new program
+        Click start program
+        Click save
+    End program:
+        Click plan settings
+        Click end
+        Confirm end program
 
-Verifications:
-    Verify window title
-    Verify nav link attribute
-    Verify nav link color
-    Verify head titles are displayed
+    Verifications:
+        Verify window title
+        Verify nav link attribute
+        Verify nav link color
+        Verify head titles are displayed
+
+
+
+Title: Calendar is disabled when no program is started
+    Login
+    Start program
+    Select a different day in the calendar
+    Remove the program
+    Verifications:
+
+
+Title: Calendar displays upcoming week days and dates
+    Login
+    Verifications:
+        Verify 7 days are displayed starting from today 
+        Verify correct dates appear in the calendar
+
+
+Title: Calendar is back to not active when ending the last program
+    Login
+    Start a program
+    Select a different day in the calendar
+    Remove the program
+    Verifications:
+        Selected day is today when ending the last program
+

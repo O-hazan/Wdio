@@ -1,7 +1,7 @@
 const loginPage = require("../pageobjects/login.page");
 const planPage = require("../pageobjects/plan.page");
 
-describe("calendar is back to default view when there is not ongoing program", () => {
+describe("Calendar is back to not active when ending the last program", () => {
   it("Login and verify there is no ongoing program", async () => {
     // Login
     await loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
