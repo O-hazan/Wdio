@@ -7,19 +7,19 @@ describe("timeline workout days match calendar workout days", () => {
     await planPage.startProgram();
   });
 
-  it("open timeline and compare workout days  to workout days in calendar", async () => {
+  it("open timeline and compare workout days to ones in the calendar", async () => {
     // Collect days that have a dot in the calendar
-    const days = await $("div[class*=calendar_wrapper]").$$(
+    const calendarDays = await $("div[class*=calendar_wrapper]").$$(
       "div[class*=calendar_dot_]"
     );
     let addToday = false;
     let calendarDaysText = [];
-    for (let i = 0; i < days.length; i++) {
-      if (days[i] == "Today") {
+    for (let i = 0; i < calendarDays.length; i++) {
+      if (calendarDays[i] == "Today") {
         addToday = true;
       } else {
         await calendarDaysText.push(
-          await days[i]
+          await calendarDays[i]
             .parentElement()
             .parentElement()
             .$("div[class*=calendar_dayName]")

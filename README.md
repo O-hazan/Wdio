@@ -4,10 +4,21 @@ WebdriveIO tests for Gymondo task
 
 ## To use this:
 
-- Install node.js install
+- INSTALL node.js
 
-- Clone the project
+- CLONE the project from github
 
-- Run npm install
+- RUN npm install in the cloned project location
 
-- Run npx wdio run wdio.conf.js
+- RUN npx wdio run wdio.conf.js
+
+### General info:
+
+A bug was found:
+Today isn't selected in calendar if user ends program after selecting another day
+
+Found in test:
+Calendar => Remove the program and verify UI is back to default
+
+Found in this step:
+Remove the program and verify UI is back to default => Verify that today is selected in the calendar

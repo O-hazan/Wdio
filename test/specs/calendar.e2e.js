@@ -2,22 +2,43 @@ const loginPage = require("../pageobjects/login.page");
 const planPage = require("../pageobjects/plan.page");
 
 describe("Calendar is back to not active when ending the last program", () => {
-  it("Login and verify there is no ongoing program", async () => {
+  it("Login, start a program and verify calendar mouse pointer", async () => {
     // Login
     await loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
+
     // Start program
     await planPage.startProgram();
+
+    // Verify calendar days have pointer cursor
+    const calendarDays = await $$(`div[class*="calendar_dayWrapper"]`);
+    for (let i = 0; i < calendarDays.length; i++) {
+      const mouseProp = await calendarDays[i].getCSSProperty("cursor");
+      await expect(await mouseProp.value).toBe("pointer");
+    }
+  });
+
+  it("Select a different day in the calendar", async () => {
     //  Select a different day in the calendar
     await $(`div[class*="calendar_wrapper"]`)
       .$$(`div[class*="calendar_dayWrapper"]`)[2]
       .click();
+  });
+
+  it("Remove the program and verify UI is back to default ", async () => {
     //   Remove the program
     await planPage.removeProgram();
-    // Verify the today is selected in the calendar - Here there is a bug that makes the test fail (Omer - remove the [2])
+
+    // Verify that today is selected in the calendar
     await expect(
       await $(`div[class*="calendar_wrapper"]`).$$(
         `div[class*="calendar_dateWrapper"]`
-      )[2]
+      )[0]
     ).toHaveElementClassContaining("calendar_active");
+
+    // Verify workout days dot indication is removed from calendar
+    await browser.pause(1000);
+    await expect(
+      await $("div[class*=calendar_wrapper]").$$("div[class*=calendar_dot_]")
+    ).toHaveLength(0);
   });
 });

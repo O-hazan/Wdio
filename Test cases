@@ -1,6 +1,6 @@
 Test cases:
 
-Title: Start and end a program and verify some elements are displayed.
+Title: Start and end a program and verify some elements are displayed. (This is a basic acceptance test for the other tests)
 
     Login:	
         Open homepage
@@ -26,12 +26,13 @@ Title: Start and end a program and verify some elements are displayed.
 
 
 
-Title: Calendar is disabled when no program is started
+Title: timeline workout days match calendar workout days
     Login
     Start program
-    Select a different day in the calendar
-    Remove the program
+    Open timeline
     Verifications:
+        Workout days in the timeline mache the ones in calendar
+
 
 
 Title: Calendar displays upcoming week days and dates
@@ -39,6 +40,7 @@ Title: Calendar displays upcoming week days and dates
     Verifications:
         Verify 7 days are displayed starting from today 
         Verify correct dates appear in the calendar
+
 
 
 Title: Calendar is back to not active when ending the last program
