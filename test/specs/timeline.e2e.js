@@ -1,23 +1,27 @@
 const loginPage = require("../pageobjects/login.page");
 const planPage = require("../pageobjects/plan.page");
 
+const userName = "qa-prod1@gymondo.de";
+const password = "purpleSquid22!";
+
 describe("timeline workout days match calendar workout days", () => {
   it("login and start a program", async () => {
-    await loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
+    await loginPage.login(userName, password);
     await planPage.startProgram();
   });
 
   it("open timeline and compare workout days to ones in the calendar", async () => {
     const calendarDaysText = await planPage.getSelectedCalendarDays();
-
+    const timeline = $("button[class*=timeline]");
+    const timelineDaysEls = $("div[class*=timeline-modal_wrapper]").$(
+      "div[class*=timeline-modal_dayTitle]"
+    );
     // Open timline modal
-    await $("button[class*=timeline]").waitForDisplayed();
-    await $("button[class*=timeline]").click();
+    await timeline.waitForDisplayed();
+    await timeline.click();
 
     // Get timeline days text
-    await $("div[class*=timeline-modal_wrapper]")
-      .$("div[class*=timeline-modal_dayTitle]")
-      .waitForDisplayed();
+    await timelineDaysEls.waitForDisplayed();
     const timelineDays = await $("div[class*=timeline-modal_wrapper]").$$(
       "div[class*=timeline-modal_dayTitle]"
     );
@@ -37,9 +41,12 @@ describe("timeline workout days match calendar workout days", () => {
       }
     }
     await expect(await $("div[class*=modal_closeWrapper]")).toBeExisting();
+
+    // Close timeline modal
     await $("div[class*=modal_closeWrapper]").click();
   });
-  it("Removes the program", () => {
+
+  it("Remove the program", () => {
     planPage.removeProgram();
   });
 });

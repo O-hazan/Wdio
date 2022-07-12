@@ -1,5 +1,5 @@
 {
-  "name": "webdriverio-tests",
+  "name": "gymondo-wdio-automation-task",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {

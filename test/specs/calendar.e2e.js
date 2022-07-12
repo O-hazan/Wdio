@@ -1,10 +1,13 @@
 const loginPage = require("../pageobjects/login.page");
 const planPage = require("../pageobjects/plan.page");
 
+const userName = "qa-prod1@gymondo.de";
+const password = "purpleSquid22!";
+
 describe("Calendar is back to not active when ending the last program", () => {
   it("Login, start a program and verify calendar mouse pointer", async () => {
     // Login
-    await loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
+    await loginPage.login(userName, password);
 
     // Start program
     await planPage.startProgram();
@@ -19,9 +22,11 @@ describe("Calendar is back to not active when ending the last program", () => {
 
   it("Select a different day in the calendar", async () => {
     //  Select a different day in the calendar
-    await $(`div[class*="calendar_wrapper"]`)
-      .$$(`div[class*="calendar_dayWrapper"]`)[2]
-      .click();
+    const thirdCalendarDay = $(`div[class*="calendar_wrapper"]`).$$(
+      `div[class*="calendar_dayWrapper"]`
+    )[2];
+
+    await thirdCalendarDay.click();
   });
 
   it("Remove the program and verify UI is back to default ", async () => {

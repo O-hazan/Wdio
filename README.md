@@ -1,34 +1,31 @@
-# Wdio
+# gymondo-wdio-automation-task
 
-WebdriveIO tests for Gymondo task
+WebdriveIO tests for Gymondo (Coding task)
 
-## To use this:
+## Prerequisites:
 
-- INSTALL node.js
+- Node.js is installed on your system
 
-- CLONE the project from github
+## Usage:
 
-- RUN npm install in the cloned project location
+- Run `npm i` from project root
 
-- RUN npx wdio run wdio.conf.js
+- Run `npx wdio run wdio.conf.js`
 
 ### General info:
 
-The scenarios can be improved and have more verifications.
+A list of the test cases can be found [here](./test_cases.txt).
 
-Code can be orgenized for better readability using variables.
+A minor bug was found during the development of one of the test cases.
 
-Test cases are in the project under "Test cases"
+In light of this bug, and in order to not provide a failing test in this coding task, currently the test is a false positive on purpose.
+After this issue is fixed, the test could become valid, by following the instructions on calendar.e2e.js (line 35).
 
-One of the test found a minor bug, see below.
-Currently the test is invalid so it will not fail.
-In order to make the test valid follow the instructions on calendar.e2e.js (line 35)
-
-Bug:
+The above mentioned Bug:
 Today isn't selected in calendar if user ends program after selecting another day
 
-Found in test:
+This bug was found in test:
 Calendar => Remove the program and verify UI is back to default
 
-Found in this step:
+During this this step:
 Remove the program and verify UI is back to default => Verify that today is selected in the calendar

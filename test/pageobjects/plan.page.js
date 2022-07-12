@@ -35,7 +35,7 @@ class PlanPage {
   async startProgram() {
     // remove existing program if there is before starting one (should be extended to remove dynamic amount of programs by various variables)
     let exist = await this.btnPlanSettings.isExisting();
-    if (exist === true) {
+    if (exist) {
       await this.removeProgram();
     }
     // Start a program
@@ -76,7 +76,7 @@ class PlanPage {
     }
 
     // Add today if it has a workout
-    if (addToday === true) {
+    if (addToday) {
       const today = new Date();
       let dd = await today.getDay();
       const daysArr = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
