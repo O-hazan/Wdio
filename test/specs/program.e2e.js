@@ -1,20 +1,23 @@
 const loginPage = require("../pageobjects/login.page");
 const planPage = require("../pageobjects/plan.page");
+const browserTitle = "Gymondo Online Fitness - Get Fit & Happy at Home";
+const userName = "qa-prod1@gymondo.de";
+const Password = "purpleSquid22!";
 
 describe("Adding first plan and verifying content", () => {
   it("Should login and verify user is on My plan tab", async () => {
     // Logs the user in
-    await loginPage.login("qa-prod1@gymondo.de", "purpleSquid22!");
+    await loginPage.login(userName, Password);
 
     // Verify window title
-    await expect(browser).toHaveTitle(
-      "Gymondo Online Fitness - Get Fit & Happy at Home"
-    );
+    await expect(browser).toHaveTitle(browserTitle);
+
     //  Verify nav link attribute
     await expect(await $(".top-nav__list").$("a=My plan")).toHaveAttribute(
       "aria-current",
       "page"
     );
+
     // Verify nav link color
     const colorobj = await $(".top-nav__list")
       .$("a=My plan")

@@ -8,35 +8,7 @@ describe("timeline workout days match calendar workout days", () => {
   });
 
   it("open timeline and compare workout days to ones in the calendar", async () => {
-    // Collect days that have a dot in the calendar
-    const calendarDays = await $("div[class*=calendar_wrapper]").$$(
-      "div[class*=calendar_dot_]"
-    );
-    let addToday = false;
-    let calendarDaysText = [];
-    for (let i = 0; i < calendarDays.length; i++) {
-      if (calendarDays[i] == "Today") {
-        addToday = true;
-      } else {
-        await calendarDaysText.push(
-          await calendarDays[i]
-            .parentElement()
-            .parentElement()
-            .$("div[class*=calendar_dayName]")
-            .getText()
-        );
-      }
-    }
-
-    // Get today weekday and check if it has a program
-    if (addToday === true) {
-      const today = new Date();
-      let dd = await today.getDay();
-      await console.log(dd);
-      const daysArr = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
-      dd = daysArr[dd];
-      await calendarDaysText.push(dd);
-    }
+    const calendarDaysText = await planPage.getSelectedCalendarDays();
 
     // Open timline modal
     await $("button[class*=timeline]").waitForDisplayed();
@@ -64,5 +36,10 @@ describe("timeline workout days match calendar workout days", () => {
         j = 0;
       }
     }
+    await expect(await $("div[class*=modal_closeWrapper]")).toBeExisting();
+    await $("div[class*=modal_closeWrapper]").click();
+  });
+  it("Removes the program", () => {
+    planPage.removeProgram();
   });
 });
