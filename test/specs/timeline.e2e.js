@@ -55,6 +55,7 @@ describe("timeline workout days match calendar workout days", () => {
     }
 
     // Compare calendar days to timeline days
+    await expect(await timelineDays[0].getText()).toEqual("Today");
     let j = 0;
     for (let i = 0; i < timelineDaysText.length; i++) {
       await expect(await timelineDaysText[i]).toContain(calendarDaysText[j]);
