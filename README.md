@@ -14,6 +14,12 @@ WebdriveIO tests for Gymondo task
 
 ### General info:
 
+The scenarios can be improved and have more verifications.
+
+Code can be orgenized for better readability using variables.
+
+Test cases are in the project under "Test cases"
+
 One of the test found a minor bug, see below.
 Currently the test is invalid so it will not fail.
 In order to make the test valid follow the instructions on calendar.e2e.js (line 35)
