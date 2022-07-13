@@ -42,8 +42,9 @@ describe("Calendar is back to not active when ending the last program", () => {
 
     // Verify workout days dot indication is removed from calendar
     await browser.pause(1000);
-    await expect(
-      await $("div[class*=calendar_wrapper]").$$("div[class*=calendar_dot_]")
-    ).toHaveLength(0);
+    const calendarDots = $("div[class*=calendar_wrapper]").$$(
+      "div[class*=calendar_dot_]"
+    );
+    await expect(await calendarDots).toHaveLength(0);
   });
 });

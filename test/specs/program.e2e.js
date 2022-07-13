@@ -3,7 +3,7 @@ const planPage = require("../pageobjects/plan.page");
 const browserTitle = "Gymondo Online Fitness - Get Fit & Happy at Home";
 const userName = "qa-prod1@gymondo.de";
 const password = "purpleSquid22!";
-
+const welcomeText = "Select a program and start planning your workout routine.";
 describe("Adding first plan and verifying content", () => {
   it("Should login and verify user is on My plan tab", async () => {
     // Logs the user in
@@ -13,10 +13,8 @@ describe("Adding first plan and verifying content", () => {
     await expect(browser).toHaveTitle(browserTitle);
 
     //  Verify nav link attribute
-    await expect(await $(".top-nav__list").$("a=My plan")).toHaveAttribute(
-      "aria-current",
-      "page"
-    );
+    const planNav = $(".top-nav__list").$("a=My plan");
+    await expect(await planNav).toHaveAttribute("aria-current", "page");
 
     // Verify nav link color
     const colorobj = await $(".top-nav__list")
@@ -43,8 +41,6 @@ describe("Adding first plan and verifying content", () => {
     await planPage.removeProgram();
     await browser.pause(1000);
     // Verify welcome text appear again
-    await expect(await $(".page-wrapper h2").getText()).toEqual(
-      "Select a program and start planning your workout routine."
-    );
+    await expect(await $(".page-wrapper h2").getText()).toEqual(welcomeText);
   });
 });

@@ -31,7 +31,6 @@ class PlanPage {
     return $("div[class*=calendar_wrapper]").$$("div[class*=calendar_dot_]");
   }
 
-
   async startProgram() {
     // remove existing program if there is before starting one (should be extended to remove dynamic amount of programs by various variables)
     let exist = await this.btnPlanSettings.isExisting();
@@ -62,7 +61,13 @@ class PlanPage {
     let addToday = false;
     let calendarDaysText = [];
     for (let i = 0; i < calendarDays.length; i++) {
-      if (calendarDays[i] == "Today") {
+      if (
+        (await calendarDays[i]
+          .parentElement()
+          .parentElement()
+          .$("div[class*=calendar_dayName]")
+          .getText()) == "Today"
+      ) {
         addToday = true;
       } else {
         await calendarDaysText.push(

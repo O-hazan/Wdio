@@ -33,6 +33,7 @@ describe("timeline workout days match calendar workout days", () => {
     // Compare calendar days to timeline days
     await expect(await timelineDays[0].getText()).toEqual("Today");
     let j = 0;
+
     for (let i = 0; i < timelineDaysText.length; i++) {
       await expect(await timelineDaysText[i]).toContain(calendarDaysText[j]);
       j++;
@@ -46,7 +47,7 @@ describe("timeline workout days match calendar workout days", () => {
     await $("div[class*=modal_closeWrapper]").click();
   });
 
-  it("Remove the program", () => {
-    planPage.removeProgram();
+  it("Remove the program", async () => {
+    await planPage.removeProgram();
   });
 });
