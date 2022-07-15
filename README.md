@@ -2,17 +2,17 @@
 
 WebdriveIO tests for Gymondo (Coding task)
 
-## Prerequisites:
+## Prerequisites
 
 - Node.js is installed on your system
 
-## Usage:
+## Usage
 
 - Run `npm i` from project root
 
 - Run `npx wdio run wdio.conf.js`
 
-### General info:
+### General info
 
 A list of the test cases can be found [here](./test_cases.txt).
 

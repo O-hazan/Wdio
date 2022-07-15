@@ -1,4 +1,34 @@
+const allure = require("allure-commandline");
+
 exports.config = {
+  onComplete: function () {
+    const reportError = new Error("Could not generate Allure report");
+    const generation = allure(["generate", "allure-results", "--clean"]);
+    return new Promise((resolve, reject) => {
+      const generationTimeout = setTimeout(() => reject(reportError), 5000);
+
+      generation.on("exit", function (exitCode) {
+        clearTimeout(generationTimeout);
+
+        if (exitCode !== 0) {
+          return reject(reportError);
+        }
+
+        console.log("Allure report successfully generated");
+        resolve();
+      });
+    });
+  },
+  afterStep: async function (
+    step,
+    scenario,
+    { error, duration, passed },
+    context
+  ) {
+    if (error) {
+      await browser.takeScreenshot();
+    }
+  },
   //
   // ====================
   // Runner Configuration
@@ -105,7 +135,7 @@ exports.config = {
   baseUrl: "https://www.gymondo.com",
   //
   // Default timeout for all waitFor* commands.
-  waitforTimeout: 100000,
+  waitforTimeout: 10000,
   //
   // Default timeout in milliseconds for request
   // if browser driver or grid doesn't send response
@@ -140,7 +170,17 @@ exports.config = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec", ["allure", { outputDir: "allure-results" }]],
+  reporters: [
+    "spec",
+    [
+      "allure",
+      {
+        outputDir: "allure-results",
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false,
+      },
+    ],
+  ],
 
   //
   // Options to be passed to Mocha.

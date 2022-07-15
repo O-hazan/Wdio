@@ -1,4 +1,19 @@
 class PlanPage {
+  // General
+
+  get planNav() {
+    return $(".top-nav__list").$("a=My plan");
+  }
+
+  get h1() {
+    return $(".page-wrapper h1");
+  }
+
+  get h2() {
+    return $(".page-wrapper h2");
+  }
+
+  // Program
   get btnNewProgram() {
     return $("div=Start new program");
   }
@@ -27,8 +42,31 @@ class PlanPage {
     return $("div[class*=program-training-settings_programTitle]");
   }
 
-  get calendarDays() {
+  // Calendar
+  get thirdCalendarDay() {
+    return $(`div[class*="calendar_wrapper"]`).$$(
+      `div[class*="calendar_dayWrapper"]`
+    )[2];
+  }
+
+  get thirdCalendarDate() {
+    return $(`div[class*="calendar_wrapper"]`).$$(
+      `div[class*="calendar_dateWrapper"]`
+    )[2];
+  }
+
+  get calendarDots() {
     return $("div[class*=calendar_wrapper]").$$("div[class*=calendar_dot_]");
+  }
+
+  get calendarDayWrap() {
+    return $("div[class*=calendar_wrapper]").$$(
+      "div[class*=calendar_dayWrapper]"
+    );
+  }
+
+  get calendarDayName() {
+    return $("div[class*=calendar_wrapper]").$$("div[class*=calendar_dayName]");
   }
 
   async startProgram() {
@@ -53,16 +91,19 @@ class PlanPage {
     await this.btnEnd.click();
     await this.btnEndConfirm.waitForDisplayed();
     await this.btnEndConfirm.click();
+    await expect(await browser.getTitle()).toBe(
+      "Gymondo Online Fitness - Get Fit & Happy at Home"
+    );
   }
 
   async getSelectedCalendarDays() {
     // Collect days that have a dot in the calendar
-    const calendarDays = await this.calendarDays;
+    const calendarDotsArr = await this.calendarDots;
     let addToday = false;
     let calendarDaysText = [];
-    for (let i = 0; i < calendarDays.length; i++) {
+    for (let i = 0; i < calendarDotsArr.length; i++) {
       if (
-        (await calendarDays[i]
+        (await calendarDotsArr[i]
           .parentElement()
           .parentElement()
           .$("div[class*=calendar_dayName]")
@@ -71,7 +112,7 @@ class PlanPage {
         addToday = true;
       } else {
         await calendarDaysText.push(
-          await calendarDays[i]
+          await calendarDotsArr[i]
             .parentElement()
             .parentElement()
             .$("div[class*=calendar_dayName]")

@@ -31,6 +31,9 @@ class LoginPage extends Page {
     await this.open();
     await browser.maximizeWindow();
     await this.btnAccept.waitForDisplayed();
+    await expect(await browser.getTitle()).toBe(
+      "Gymondo Online Fitness - Get Fit & Happy at Home"
+    );
     await this.btnAccept.click();
     await this.loginBtn.waitForDisplayed();
     await this.loginBtn.click();

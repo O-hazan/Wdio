@@ -1,11 +1,15 @@
 const loginPage = require("../pageobjects/login.page");
 const planPage = require("../pageobjects/plan.page");
+
 const browserTitle = "Gymondo Online Fitness - Get Fit & Happy at Home";
 const userName = "qa-prod1@gymondo.de";
 const password = "purpleSquid22!";
 const welcomeText = "Select a program and start planning your workout routine.";
+const SelectedNavColor = "#ff7f66";
+const h2Text = "Select a program and start planning your workout routine.";
+
 describe("Adding first plan and verifying content", () => {
-  it("Should login and verify user is on My plan tab", async () => {
+  it("Login and verify user is on My plan tab", async () => {
     // Logs the user in
     await loginPage.login(userName, password);
 
@@ -13,21 +17,22 @@ describe("Adding first plan and verifying content", () => {
     await expect(browser).toHaveTitle(browserTitle);
 
     //  Verify nav link attribute
-    const planNav = $(".top-nav__list").$("a=My plan");
-    await expect(await planNav).toHaveAttribute("aria-current", "page");
+    await expect(await planPage.planNav).toHaveAttribute(
+      "aria-current",
+      "page"
+    );
 
     // Verify nav link color
-    const colorobj = await $(".top-nav__list")
-      .$("a=My plan")
-      .getCSSProperty("color");
-    let colorHex = colorobj.parsed.hex;
-    await expect(colorHex).toBe("#ff7f66");
+    const colorobj = await planPage.planNav.getCSSProperty("color");
+    let planNavColor = colorobj.parsed.hex;
+    await expect(planNavColor).toBe(SelectedNavColor);
+
     // Verify head titles are displayed
-    await expect(await $(".page-wrapper h1").getText()).toContain(", Tester!");
-    await expect(await $(".page-wrapper h2")).toBeDisplayed();
+    await expect(await planPage.h1.getText()).toContain(", Tester!");
+    await expect(await planPage.h1).toBeDisplayed();
   });
 
-  it("Should start a new program", async () => {
+  it("Start a new program", async () => {
     //  Start a program
     await planPage.startProgram();
     //  Verify program settings and timeline area appears.
@@ -36,11 +41,12 @@ describe("Adding first plan and verifying content", () => {
     await expect(await $("div[class*=header_statsLink]")).toBeDisplayed();
   });
 
-  it("Should remove the added program", async () => {
+  it("Remove the added program", async () => {
     //  Clean after the test
     await planPage.removeProgram();
     await browser.pause(1000);
     // Verify welcome text appear again
     await expect(await $(".page-wrapper h2").getText()).toEqual(welcomeText);
+    await expect(await planPage.h2.getText()).toBe(h2Text);
   });
 });
