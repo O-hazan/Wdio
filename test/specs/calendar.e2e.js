@@ -30,7 +30,7 @@ describe("Calendar is back to not active when ending the last program", () => {
 
     // Verify that today is selected in the calendar
     await expect(
-      await planPage.thirdCalendarDate //Change here the 2 to 0 to make the test valid and it will fail because the wrong item is selected
+      await planPage.thirdCalendarDate //Change here from: 'planPage.thirdCalendarDate' to 'planPage.todayCalendarDate' to make the test valid and it will fail due to wrong item selected appearance
     ).toHaveAttrContaining("class", "calendar_active");
 
     // Verify workout days dot indication is removed from calendar

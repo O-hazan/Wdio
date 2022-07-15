@@ -11,29 +11,21 @@ describe("timeline workout days match calendar workout days", () => {
   });
 
   it("open timeline and compare workout days to ones in the calendar", async () => {
+    await browser.pause(1000);
     const calendarDaysText = await planPage.getSelectedCalendarDays();
-    const timeline = $("button[class*=timeline]");
-    const timelineDaysEls = $("div[class*=timeline-modal_wrapper]").$(
-      "div[class*=timeline-modal_dayTitle]"
-    );
+    await console.log("calendarDaysText", calendarDaysText);
     // Open timline modal
-    await timeline.waitForDisplayed();
-    await timeline.click();
-
+    await planPage.btnTimeline.waitForDisplayed();
+    await planPage.btnTimeline.click();
     // Get timeline days text
-    await timelineDaysEls.waitForDisplayed();
-    const timelineDays = await $("div[class*=timeline-modal_wrapper]").$$(
-      "div[class*=timeline-modal_dayTitle]"
-    );
+    await planPage.timelineToday.waitForDisplayed();
     let timelineDaysText = [];
-    for (let i = 1; i < timelineDays.length; i++) {
-      await timelineDaysText.push(await timelineDays[i].getText());
+    for (let i = 1; i < planPage.timelineDays.length; i++) {
+      await timelineDaysText.push(await planPage.timelineDays[i].getText());
     }
-
     // Compare calendar days to timeline days
-    await expect(await timelineDays[0].getText()).toEqual("Today");
+    await expect(await planPage.timelineDays[0].getText()).toEqual("Today");
     let j = 0;
-
     for (let i = 0; i < timelineDaysText.length; i++) {
       await expect(await timelineDaysText[i]).toContain(calendarDaysText[j]);
       j++;
@@ -42,9 +34,8 @@ describe("timeline workout days match calendar workout days", () => {
       }
     }
     await expect(await $("div[class*=modal_closeWrapper]")).toBeExisting();
-
     // Close timeline modal
-    await $("div[class*=modal_closeWrapper]").click();
+    await planPage.btnCloseTimeline.click();
   });
 
   it("Remove the program", async () => {

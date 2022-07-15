@@ -55,6 +55,12 @@ class PlanPage {
     )[2];
   }
 
+  get todayCalendarDate() {
+    return $(`div[class*="calendar_wrapper"]`).$$(
+      `div[class*="calendar_dateWrapper"]`
+    )[0];
+  }
+
   get calendarDots() {
     return $("div[class*=calendar_wrapper]").$$("div[class*=calendar_dot_]");
   }
@@ -69,8 +75,30 @@ class PlanPage {
     return $("div[class*=calendar_wrapper]").$$("div[class*=calendar_dayName]");
   }
 
+  // Timeline
+
+  get btnTimeline() {
+    return $("button[class*=timeline]");
+  }
+
+  get timelineDays() {
+    return $("div[class*=timeline-modal_wrapper]").$$(
+      "div[class*=timeline-modal_dayTitle]"
+    );
+  }
+
+  get timelineToday() {
+    return $("div[class*=timeline-modal_wrapper]").$(
+      "div[class*=timeline-modal_dayTitle]"
+    );
+  }
+
+  get btnCloseTimeline() {
+    return $("div[class*=modal_closeWrapper]");
+  }
+
   async startProgram() {
-    // remove existing program if there is before starting one (should be extended to remove dynamic amount of programs by various variables)
+    // remove existing program if there is before starting one
     let exist = await this.btnPlanSettings.isExisting();
     if (exist) {
       await this.removeProgram();

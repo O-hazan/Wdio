@@ -7,6 +7,7 @@ const password = "purpleSquid22!";
 const welcomeText = "Select a program and start planning your workout routine.";
 const SelectedNavColor = "#ff7f66";
 const h2Text = "Select a program and start planning your workout routine.";
+const browserUrl = "gymondo.com/train/timeline";
 
 describe("Adding first plan and verifying content", () => {
   it("Login and verify user is on My plan tab", async () => {
@@ -15,19 +16,19 @@ describe("Adding first plan and verifying content", () => {
 
     // Verify window title
     await expect(browser).toHaveTitle(browserTitle);
+    await expect(browser).toHaveUrlContaining(browserUrl);
 
     //  Verify nav link attribute
     await expect(await planPage.planNav).toHaveAttribute(
       "aria-current",
       "page"
     );
-
     // Verify nav link color
     const colorobj = await planPage.planNav.getCSSProperty("color");
     let planNavColor = colorobj.parsed.hex;
     await expect(planNavColor).toBe(SelectedNavColor);
 
-    // Verify head titles are displayed
+    // Verify header title is displayed
     await expect(await planPage.h1.getText()).toContain(", Tester!");
     await expect(await planPage.h1).toBeDisplayed();
   });
