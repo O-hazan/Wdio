@@ -1,15 +1,15 @@
-Test cases:
+# Test cases:
 
-Title: Start and end a program and verify some elements are displayed. (This is a basic acceptance test for the other tests)
+## Title: Start and end a program and verify some elements are displayed. (This is a basic acceptance test for the other tests)
 
-    Login:	
+    Login:
         Open homepage
         Accept coockies
         Click Login button
         Enter user name and password
         Click submit
         Click "got it"
-    Start program:	
+    Start program:
         Click start new program
         Click start program
         Click save
@@ -24,17 +24,16 @@ Title: Start and end a program and verify some elements are displayed. (This is 
         Verify nav link color
         Verify head titles are displayed
 
+## Title: timeline workout days match calendar workout days ([timeline.e2e.js](./test/specs/timeline.e2e.js))
 
-
-Title: timeline workout days match calendar workout days (timeline.e2e.js)
     Login
     Start program
     Open timeline
     Verifications:
         Workout days in the timeline mache the ones in calendar
 
+## Title: Calendar is back to not active when ending the last program ([calendar.e2e.js](./test/specs/calendar.e2e.js))
 
-Title: Calendar is back to not active when ending the last program (calendar.e2e.js)
     Login
     Start a program
     Select a different day in the calendar
@@ -42,10 +41,9 @@ Title: Calendar is back to not active when ending the last program (calendar.e2e
     Verifications:
         Selected day is today when ending the last program
 
+## Title: Calendar displays upcoming week days and dates
 
-Title: Calendar displays upcoming week days and dates
     Login
     Verifications:
-        Verify 7 days are displayed starting from today 
+        Verify 7 days are displayed starting from today
         Verify correct dates appear in the calendar
-

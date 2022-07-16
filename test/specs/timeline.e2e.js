@@ -13,7 +13,6 @@ describe("timeline workout days match calendar workout days", () => {
   it("open timeline and compare workout days to ones in the calendar", async () => {
     await browser.pause(1000);
     const calendarDaysText = await planPage.getSelectedCalendarDays();
-    await console.log("calendarDaysText", calendarDaysText);
     // Open timline modal
     await planPage.btnTimeline.waitForDisplayed();
     await planPage.btnTimeline.click();

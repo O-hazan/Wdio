@@ -15,6 +15,7 @@ WebdriveIO tests for Gymondo (Coding task)
 ### General info
 
 A list of the test cases can be found [here](./test_cases.txt).
+Test cases can be found [here](./test/specs/)
 
 A minor bug was found during the development of one of the test cases.
 
