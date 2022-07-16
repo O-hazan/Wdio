@@ -38,12 +38,16 @@
     Start a program
     Select a different day in the calendar
     Remove the program
-    Verifications:
+
+### Verifications:
+
         Selected day is today when ending the last program
 
 ## Title: Calendar displays upcoming week days and dates
 
     Login
-    Verifications:
+
+### Verifications:
+
         Verify 7 days are displayed starting from today
         Verify correct dates appear in the calendar
