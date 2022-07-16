@@ -46,8 +46,6 @@
 ## Title: Calendar displays upcoming week days and dates
 
     Login
-
-### Verifications:
-
+    Verifications:
         Verify 7 days are displayed starting from today
         Verify correct dates appear in the calendar

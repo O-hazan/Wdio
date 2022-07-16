@@ -23,6 +23,9 @@ describe("Calendar is back to not active when ending the last program", () => {
   it("Select a different day in the calendar", async () => {
     //  Select a different day in the calendar
     await planPage.thirdCalendarDay.click();
+    await expect(
+      await planPage.thirdCalendarDate //Change here from: 'planPage.thirdCalendarDate' to 'planPage.todayCalendarDate' to make the test valid and it will fail due to wrong item selected appearance
+    ).toHaveAttrContaining("class", "calendar_active");
   });
 
   it("Remove the program and verify UI is back to default ", async () => {
