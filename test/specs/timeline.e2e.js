@@ -6,7 +6,8 @@ const password = "purpleSquid22!";
 
 describe("timeline workout days match calendar workout days", () => {
   it("login and start a program", async () => {
-    await loginPage.login(userName, password);
+    const isLoggedIn = await loginPage.login(userName, password);
+    await expect(isLoggedIn).toBe(true);
     await planPage.startProgram();
   });
 

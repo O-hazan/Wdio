@@ -1,5 +1,9 @@
 const Page = require("./page");
 
+const homePageUrl = "https://www.gymondo.com/";
+const homePageUrlLoggedin = "https://www.gymondo.com/train/timeline";
+const browserTitle = "Gymondo Online Fitness - Get Fit & Happy at Home";
+
 class LoginPage extends Page {
   get loginBtn() {
     return $(".top-nav").$("div=Log in");
@@ -30,6 +34,8 @@ class LoginPage extends Page {
   async login(username, password) {
     await this.open();
     await browser.maximizeWindow();
+    await expect(browser).toHaveUrlContaining(homePageUrl);
+    await expect(browser).toHaveTitle(browserTitle);
     await this.btnAccept.waitForDisplayed();
     await this.btnAccept.click();
     await this.loginBtn.waitForDisplayed();
@@ -40,8 +46,12 @@ class LoginPage extends Page {
     await this.inputPassword.waitForDisplayed;
     await this.btnSubmit.waitForDisplayed();
     await this.btnSubmit.click();
+    // browser.debug();
     await this.btnGotIt.waitForDisplayed();
     await this.btnGotIt.click();
+    // console.log(isLoggedIn);
+    return browser.getUrl !== homePageUrlLoggedin;
+    // return isLoggedIn;
   }
 
   open() {

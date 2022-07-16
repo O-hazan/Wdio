@@ -110,6 +110,10 @@ class PlanPage {
     await this.btnStartsProgram.click();
     await this.btnSave.waitForDisplayed();
     await this.btnSave.click();
+    //  Verify program settings and timeline area appears.
+    await expect(await $("div[class*=calendar_buttons]")).toBeDisplayed();
+    // Verify program stats appear
+    await expect(await $("div[class*=header_statsLink]")).toBeDisplayed();
   }
 
   async removeProgram() {

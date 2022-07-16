@@ -7,7 +7,8 @@ const password = "purpleSquid22!";
 describe("Calendar is back to not active when ending the last program", () => {
   it("Login, start a program and verify calendar mouse pointer", async () => {
     // Login
-    await loginPage.login(userName, password);
+    const isLoggedIn = await loginPage.login(userName, password);
+    await expect(isLoggedIn).toBe(true);
     // Start program
     await planPage.startProgram();
 

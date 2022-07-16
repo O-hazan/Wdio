@@ -36,10 +36,7 @@ describe("Adding first plan and verifying content", () => {
   it("Start a new program", async () => {
     //  Start a program
     await planPage.startProgram();
-    //  Verify program settings and timeline area appears.
-    await expect(await $("div[class*=calendar_buttons]")).toBeDisplayed();
-    // Verify program stats appear
-    await expect(await $("div[class*=header_statsLink]")).toBeDisplayed();
+
   });
 
   it("Remove the added program", async () => {
