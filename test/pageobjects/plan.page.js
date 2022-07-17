@@ -99,6 +99,7 @@ class PlanPage {
 
   async startProgram() {
     // remove existing program if there is before starting one
+    await browser.pause(1000);
     let exist = await this.btnPlanSettings.isExisting();
     if (exist) {
       await this.removeProgram();
@@ -110,29 +111,30 @@ class PlanPage {
     await this.btnStartsProgram.click();
     await this.btnSave.waitForDisplayed();
     await this.btnSave.click();
-    //  Verify program settings and timeline area appears.
-    await expect(await $("div[class*=calendar_buttons]")).toBeDisplayed();
-    // Verify program stats appear
-    await expect(await $("div[class*=header_statsLink]")).toBeDisplayed();
   }
 
   async removeProgram() {
-    await this.btnPlanSettings.waitForDisplayed();
-    await this.btnPlanSettings.click();
-    await this.btnEnd.waitForDisplayed();
-    await this.btnEnd.click();
-    await this.btnEndConfirm.waitForDisplayed();
-    await this.btnEndConfirm.click();
-    await expect(await browser.getTitle()).toBe(
-      "Gymondo Online Fitness - Get Fit & Happy at Home"
-    );
+    await browser.pause(1000);
+    let exist = await this.btnPlanSettings.isExisting();
+    await browser.pause(2000);
+
+    if (!exist) {
+      return;
+    } else {
+      await this.btnPlanSettings.waitForDisplayed();
+      await this.btnPlanSettings.click();
+      await this.btnEnd.waitForDisplayed();
+      await this.btnEnd.click();
+      await this.btnEndConfirm.waitForDisplayed();
+      await this.btnEndConfirm.click();
+    }
   }
 
   async getSelectedCalendarDays() {
     // Collect days that have a dot in the calendar
     const calendarDotsArr = await this.calendarDots;
     let addToday = false;
-    let calendarDaysText = [];
+    const calendarDaysText = [];
     for (let i = 0; i < calendarDotsArr.length; i++) {
       if (
         (await calendarDotsArr[i]
@@ -152,7 +154,6 @@ class PlanPage {
         );
       }
     }
-
     // Add today if it has a workout
     if (addToday) {
       const today = new Date();
