@@ -98,13 +98,11 @@ class PlanPage {
   }
 
   async startProgram() {
-    // remove existing program if there is before starting one
     await browser.pause(1000);
     let exist = await this.btnPlanSettings.isExisting();
     if (exist) {
       await this.removeProgram();
     }
-    // Start a program
     await (await this.btnNewProgram).waitForDisplayed();
     await this.btnNewProgram.click();
     await this.btnStartsProgram.waitForDisplayed();
@@ -117,7 +115,6 @@ class PlanPage {
     await browser.pause(1000);
     let exist = await this.btnPlanSettings.isExisting();
     await browser.pause(2000);
-
     if (!exist) {
       return;
     } else {
@@ -131,7 +128,6 @@ class PlanPage {
   }
 
   async getSelectedCalendarDays() {
-    // Collect days that have a dot in the calendar
     const calendarDotsArr = await this.calendarDots;
     let addToday = false;
     const calendarDaysText = [];
@@ -154,7 +150,6 @@ class PlanPage {
         );
       }
     }
-    // Add today if it has a workout
     if (addToday) {
       const today = new Date();
       let dd = await today.getDay();
