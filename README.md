@@ -1,4 +1,4 @@
-# gymondo-wdio-automation-task
+# Gymondo-wdio-automation-task
 
 WebdriveIO tests for Gymondo (Coding task)
 
@@ -26,7 +26,4 @@ The above mentioned Bug:
 Today isn't selected in calendar if user ends program after selecting another day
 
 This bug was found in test:
-Calendar => Remove the program and verify UI is back to default
-
-During this this step:
-Remove the program and verify UI is back to default => Verify that today is selected in the calendar
+Today is selected in the calendar after ending the last prograrm
