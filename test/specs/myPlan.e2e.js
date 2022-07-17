@@ -62,14 +62,14 @@ describe("My plan page", () => {
     await planPage.thirdCalendarDay.click();
     await planPage.removeProgram();
     await browser.pause(1000);
-    const todayDayTextColor = await planPage.thirdCalendarDay //Change here from: 'planPage.thirdCalendarDay' to 'planPage.todayCalendarDate' to make the test valid and it will fail because a wrong item is selected
+    const todayDayTextColor = await planPage.thirdCalendarDay //Change here from: 'planPage.thirdCalendarDay' to 'planPage.todayCalendarDate' to make the test valid
       .$(`div[class*="calendar_dayName"]`)
       .getCSSProperty("color");
-    const todayDateTextColor = await planPage.thirdCalendarDay //Change here from: 'planPage.thirdCalendarDay' to 'planPage.todayCalendarDate' to make the test valid and it will fail because a wrong item is selected
+    const todayDateTextColor = await planPage.thirdCalendarDay //Change here from: 'planPage.thirdCalendarDay' to 'planPage.todayCalendarDate' to make the test valid
       .$(`div[class*="calendar_date"]`)
       .getCSSProperty("color");
     await expect(
-      await planPage.thirdCalendarDate //Change here from: 'planPage.thirdCalendarDay' to 'planPage.todayCalendarDate' to make the test valid and it will fail because a wrong item is selected
+      await planPage.thirdCalendarDate //Change here from: 'planPage.thirdCalendarDay' to 'planPage.todayCalendarDate' to make the test valid
     ).toHaveAttrContaining("class", "calendar_active");
     await expect(todayDayTextColor.parsed.hex).toEqual("#ffffff");
     await expect(todayDateTextColor.parsed.hex).toEqual("#ffffff");

@@ -31,7 +31,6 @@ class LoginPage extends Page {
     const mock = await browser.mock(
       "https://www.gymondo.com/api/v2/oauth/token?locale=en_US"
     );
-
     await this.open();
     await browser.maximizeWindow();
     await browser.pause(1000);
