@@ -6,6 +6,9 @@ WebdriveIO tests for Gymondo (Coding task)
 
 - Node.js is installed on your system
 
+- Latest Chrome broswer is installed on your system(103)
+
+
 ## Usage
 
 - Run `npm i` from project root

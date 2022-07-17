@@ -28,6 +28,10 @@ class LoginPage extends Page {
   }
 
   async login(username, password) {
+    const mock = await browser.mock(
+      "https://www.gymondo.com/api/v2/oauth/token?locale=en_US"
+    );
+
     await this.open();
     await browser.maximizeWindow();
     await browser.pause(1000);
@@ -41,9 +45,13 @@ class LoginPage extends Page {
     await this.inputPassword.waitForDisplayed;
     await this.btnSubmit.waitForDisplayed();
     await this.btnSubmit.click();
+    await browser.pause(1000);
+    if (mock.matches[0].statusCode !== 200) {
+      throw new Error("Login failed");
+    }
     await this.btnGotIt.waitForDisplayed();
     await this.btnGotIt.click();
-    return !(await this.btnLogin.isExisting());
+    return mock.matches[0].statusCode === 200;
   }
 
   open() {

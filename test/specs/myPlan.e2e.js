@@ -7,10 +7,7 @@ describe("My plan page", () => {
   const myPlanUrl = "https://www.gymondo.com/train/timeline";
 
   before(async function () {
-    const isLoggedIn = await loginPage.login(userName, password);
-    if (!isLoggedIn) {
-      throw new Error("Login failed");
-    }
+    await loginPage.login(userName, password);
   });
 
   beforeEach(async function () {
